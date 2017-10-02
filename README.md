@@ -36,7 +36,7 @@ The `-Y` option enables forwarding of all opened windows to your local machine.
 The school's Windows desktops have the program **NX Client** installed, which allows to to make a connection to the server via SSH (secure shell).
 
 First try to use the prepared profile file.
-- Download the file [MESA.nxs](./MESA.nxs) and save it on your desktop.
+- Download the file [MESA.nxs](https://mas-gitlab.ncl.ac.uk/PHY3033/exercises/raw/master/MESA.nxs) (also on blackboard) and save it to your desktop.
 - Double click it.
 - Enter your university username and password
 - Click `Login`.
