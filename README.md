@@ -44,7 +44,7 @@ First try to use the prepared profile file.
 
 If this does not work, follow these manual instructions.
 - Open the start menu.
-* Search for `NX Cleint for Windows` and start it.
+* Search for `NX Client for Windows` and start it.
 - Click `Next`.
 - Give the session a name (e.g., `MESA`).
 - Set host to `phy-mesa01.ncl.ac.uk` and click `Next`.
