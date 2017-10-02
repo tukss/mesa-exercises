@@ -10,6 +10,7 @@ You are not expected to read or modify any of the Fortran code, although you are
 We are running a GNU/Linux server with a full install of MESA and many other utilities. Its host name is `phy-mesa01.ncl.ac.uk` and it is currently only reachable from the university network (including Wifi). You can log in remotely either with a pure command-line interface or running a graphical desktop environment. You can use the desktop machines in the cluster or you own device. As the steps for this differ between the different operating systems, please find the instructions in applicable section below.
 
 #### GNU/Linux
+You can log in via SSH (secure shell).
 You are most likely to have an terminal emulator already installed on your system. Look for programs named Terminal, Konsole or xterm. Start it and type in the following command (replacing username with the name of your university account)
 ```bash
 ssh -Y username@phy-mesa01.ncl.ac.uk
@@ -20,6 +21,7 @@ The `-Y` option enables forwarding of all opened windows to your local machine.
 
 
 #### macOS
+You can log in via SSH (secure shell).
 Being a Unix system macOS comes with a terminal emulator. To be able to see the graphical output of MESA you need to install an X-server as well. You can download it from [this site](https://www.xquartz.org/).
 
 Start the Terminal app and type in the following command (replacing username with the name of your university account)
