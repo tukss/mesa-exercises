@@ -33,15 +33,30 @@ When asked to verify the keys compare them with [this section](#ssh-host-keys).
 The `-Y` option enables forwarding of all opened windows to your local machine.
 
 #### Windows
-The school's Windows desktops have the program **putty** installed, which allows to to make a connection to the server via SSH (secure shell).
+The school's Windows desktops have the program **NX Client** installed, which allows to to make a connection to the server via SSH (secure shell).
 
+First try to use the prepared profile file.
+- Download the file [MESA.nxs](./MESA.nxs) and save it on your desktop.
+- Double click it.
+- Enter your university username and password
+- Click `Login`.
+- You should have a remote desktop session now.
+
+If this does not work, follow these manual instructions.
 - Open the start menu.
-* Search for `putty` and start it.
-- Set host name to `phy-mesa01.ncl.ac.uk`
-- Set port to 22 and connection type to SSH.
-- Click `Default Settings` and `Save` if you like, to save settings for the next time.
-- When asked to verify the keys compare them with [this section](#ssh-host-keys).
+* Search for `NX Cleint for Windows` and start it.
+- Click `Next`.
+- Give the session a name (e.g., `MESA`).
+- Set host to `phy-mesa01.ncl.ac.uk` and click `Next`.
+- Select `Unix` and `Custom`.
+- Click `Settings`.
+- Select `Run the following command` and type in `startxfce4`.
+- Select `New virtual desktop` and then `OK`.
+- Click `Next`.
+- Click `Finish`.
+- Enter your username and password and click `Login`.
 - Log in with your university username and password.
+- You should have a remote desktop session now.
 
 #### Accessing your data
 Your have access to your Windows profile directory from the server. Just navigate to the path `/campus/username` (using your login instead of username). Files copied there will be immediately accessible on the university Windows system.
