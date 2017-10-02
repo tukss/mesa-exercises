@@ -33,7 +33,15 @@ When asked to verify the keys compare them with [this section](#ssh-host-keys).
 The `-Y` option enables forwarding of all opened windows to your local machine.
 
 #### Windows
-The school's Windows desktops have the **NX client** installed with which you can log in to a desktop session on the server.
+The school's Windows desktops have the program **putty** installed, which allows to to make a connection to the server via SSH (secure shell).
+
+- Open the start menu.
+* Search for `putty` and start it.
+- Set host name to `phy-mesa01.ncl.ac.uk`
+- Set port to 22 and connection type to SSH.
+- Click `Default Settings` and `Save` if you like, to save settings for the next time.
+- When asked to verify the keys compare them with [this section](#ssh-host-keys).
+- Log in with your university username and password.
 
 #### Accessing your data
 Your have access to your Windows profile directory from the server. Just navigate to the path `/campus/username` (using your login instead of username). Files copied there will be immediately accessible on the university Windows system.
