@@ -6,16 +6,15 @@
       !show_net_species_info = .true.
       !show_net_reactions_info = .true.
 
-      create_pre_main_sequence_model = .true.
+      create_pre_main_sequence_model = .false.
 
-      save_model_when_terminate = .true.
-      save_model_filename = 'part1.mod'
+      !save_model_when_terminate = .true.
+      !save_model_filename = 'part1.mod'
+
+      profile_columns_file = "mycols.list"
 
       kappa_file_prefix = 'gs98'
       
-      !change_lnPgas_flag = .true.
-      !new_lnPgas_flag = .true.
-
       change_initial_net = .true.      
       new_net_name = 'o18_and_ne22.net'
 
@@ -30,7 +29,7 @@
       change_D_omega_flag = .true.
       new_D_omega_flag = .true.
 
-      !pgstar_flag = .true.
+      pgstar_flag = .true.
 
 
 / ! end of star_job namelist
@@ -84,80 +83,6 @@
       Reimers_scaling_factor = 0.7d0  
       Blocker_scaling_factor = 0.7d0  
 
-         
-      
-! test with "Gold Standard" tolerances -- FAILED
-      !newton_iterations_limit = 20
-      !max_tries = 20
-      !iter_for_resid_tol2 = 30
-      !tol_residual_norm1 = 1d-9
-      !tol_max_residual1 = 1d-7
-      !tol_correction_norm = 1d-9
-      !tol_max_correction = 1d-7
-
-
-
-      !photo_interval = 1
-      !profile_interval = 1
-      !history_interval = 1
-      !terminal_interval = 1
-
-! FOR DEBUGGING
-
-      !report_hydro_solver_progress = .true. ! set true to see info about newton iterations
-      !report_ierr = .true. ! if true, produce terminal output when have some internal error
-      !hydro_show_correction_info = .true.
-
-      ! hydro debugging
-      !hydro_check_everything = .true.
-      !hydro_inspectB_flag = .true.
-      !hydro_sizequ_flag = .true.
-      
-      !hydro_get_a_numerical_partial = 1d-4
-      !hydro_test_partials_k = 1
-      !hydro_numerical_jacobian = .true.
-      !hydro_save_numjac_plot_data = .true.
-      !hydro_dump_call_number = 195
-      !hydro_dump_iter_number = 5
-      !hydro_epsder_struct = 1d-6
-      !hydro_epsder_chem = 1d-6
-
-      !fill_arrays_with_NaNs = .true.
-      !stop_for_NaNs = .true.
-      
-      !max_years_for_timestep = 3.67628942044319d-05
-
-      !report_why_dt_limits = .true.
-      !report_all_dt_limits = .true.
-      !report_hydro_dt_info = .true.
-      
-      !show_mesh_changes = .true.
-      !mesh_dump_call_number = 5189
-      !okay_to_remesh = .false.
-      
-      !trace_evolve = .true.
-
-      !trace_newton_bcyclic_solve_input = .true. ! input is "B" j k iter B(j,k)
-      !trace_newton_bcyclic_solve_output = .true. ! output is "X" j k iter X(j,k)
-
-      !trace_newton_bcyclic_matrix_input = .true.
-      !trace_newton_bcyclic_matrix_output = .true.
-      
-      !trace_newton_bcyclic_steplo = 1 ! 1st model number to trace
-      !trace_newton_bcyclic_stephi = 1 ! last model number to trace
-      
-      !trace_newton_bcyclic_iterlo = 2 ! 1st newton iter to trace
-      !trace_newton_bcyclic_iterhi = 2 ! last newton iter to trace
-      
-      !trace_newton_bcyclic_nzlo = 1 ! 1st cell to trace
-      !trace_newton_bcyclic_nzhi = 10000 ! last cell to trace; if < 0, then use nz as nzhi
-      
-      !trace_newton_bcyclic_jlo = 1 ! 1st var to trace
-      !trace_newton_bcyclic_jhi = 100 ! last var to trace; if < 0, then use nvar as jhi
-      
-      !trace_k = 0
-      
-
 / ! end of controls namelist
 
 
@@ -167,7 +92,7 @@
          
 
          
-      Grid6_win_flag = .true.
+      !Grid6_win_flag = .true.
       Grid6_win_width = 11
          
       !Grid6_file_flag = .true.
@@ -189,14 +114,42 @@
       Abundance_xmax = -101d0 ! only used if /= -101d0
       Abundance_log_mass_frac_min = -6 ! only used if < 0
 
-      !Profile_Panels4_win_flag = .true.
-      !Profile_Panels4_win_width = 6
+      Profile_Panels4_win_flag = .false.
+      Profile_Panels4_win_width = 6
          
+  ! show temperature/density profile
+  ! this plots the internal structure at single timestep
+    TRho_Profile_win_flag = .true.
+    !TRho_Profile_file_flag = .true.
+    TRho_Profile_file_dir = 'png'
+    TRho_file_prefix = 'TRho_'
+    TRho_file_interval = 1
+
+  ! add legend explaining colors
+    show_TRho_Profile_legend = .true.
+
+  ! display numerical info about the star
+    show_TRho_Profile_text_info = .true.
+
+  ! set window size (aspect_ratio = height/width)
+    TRho_Profile_win_width = 8
+    TRho_Profile_win_aspect_ratio = 0.75
+
       ! Abundance window -- current model abundance profiles
       
-         !Abundance_win_flag = .true.
+         Abundance_win_flag = .true.
+         !Abundance_file_flag = .true.
+         Abundance_file_dir = 'png'
+         Abundance_file_prefix = 'abund_'
+         Abundance_file_interval = 1
       
          Abundance_win_width = 9
          Abundance_win_aspect_ratio = 0.75 ! aspect_ratio = height/width
+
+         HR_win_flag = .true.
+         !HR_file_flag = .true.
+         HR_file_dir = 'png'
+         HR_file_prefix = 'HR_'
+         HR_file_interval = 1
    
 / ! end of pgstar namelist
