@@ -11,15 +11,19 @@ Rgas = 83144621.0 # erg / mol K
 solarlum = 3.846e33 # erg / s
 umass = 1.660538921e-24 # g
 
-class mesa_profile(object):
-    def __init__(self, filename):
+class profile(object):
+    def __init__(self, filename, profile=True):
         with open(filename, 'r') as f:
             f.readline() # skip column numbers
             labels = f.readline().split()
             values = f.readline().split()
-            # first two are integers
-            for l, v in zip(labels[:2], values[:2]):
-                self.__dict__[l] = int(v)
+            # first few are integers
+            if profile:
+                n_int = 2
+            else:
+                n_int = 1
+            for l, v in zip(labels[:n_int], values[:n_int]):
+                self.__dict__[labels[0]] = int(v)
             for l, v in zip(labels[2:], values[2:]):
                 self.__dict__[l] = float(v)
 
@@ -28,6 +32,15 @@ class mesa_profile(object):
 
             self.columns = f.readline().split()
             values = np.loadtxt(f)
+            if profile:
+                sl = slice(None, None, -1)
+            else:
+                sl = slice(None)
             for i, l in enumerate(self.columns):
                 # order of values is inverted to start at the core
-                self.__dict__[l] = values[::-1,i]
+                self.__dict__[l] = values[sl,i]
+
+class history(profile):
+    def __init__(self, *args, **kwargs):
+        kwargs['profile'] = False
+        super(history,self).__init__(*args, **kwargs)
