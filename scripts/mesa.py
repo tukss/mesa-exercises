@@ -32,13 +32,8 @@ class profile(object):
 
             self.columns = f.readline().split()
             values = np.loadtxt(f)
-            if profile:
-                sl = slice(None, None, -1)
-            else:
-                sl = slice(None)
             for i, l in enumerate(self.columns):
-                # order of values is inverted to start at the core
-                self.__dict__[l] = values[sl,i]
+                self.__dict__[l] = values[:,i]
 
 class history(profile):
     def __init__(self, *args, **kwargs):
