@@ -10,6 +10,7 @@ Na = 6.022142e+23 # 1 / mol
 Rgas = 83144621.0 # erg / mol K
 solarlum = 3.846e33 # erg / s
 umass = 1.660538921e-24 # g
+hplanck = 6.62607e-27 # g cm^2 / s
 
 class profile(object):
     def __init__(self, filename, profile=True):
