@@ -1,0 +1,182 @@
+! inlist to evolve a 15 solar mass star
+
+! For the sake of future readers of this file (yourself included),
+! ONLY include the controls you are actually using.  DO NOT include
+! all of the other controls that simply have their default values.
+
+&star_job
+
+    mesa_dir = ''
+
+  ! Startup information text
+    show_log_description_at_start = .true.
+    show_net_species_info = .true.
+    show_net_reactions_info = .true.
+    list_net_reactions = .true.
+    show_eqns_and_vars_names = .true.
+
+  ! Customized history.data and profileXXX.data columns
+    history_columns_file = 'hist_col.list'
+    profile_columns_file = 'mycols.list'
+
+  ! begin with a pre-main sequence model
+    create_pre_main_sequence_model = .false.
+
+  ! Load from a good starting point
+    load_saved_model = .false.
+    saved_model_name = 'undefined'
+
+  ! Initial Mixture based on Asplund et al. 2009, Ann. Rev. Astron. & Astrophys.
+    initial_zfracs = 6
+    change_initial_Y = .true.
+    new_Y = 0.276
+    change_initial_Z = .true.
+    new_Z = 0.014
+
+  ! Use Pgas and T as independent structure variables for EOS
+    change_lnPgas_flag = .true.
+    change_initial_lnPgas_flag = .true.
+    new_lnPgas_flag = .true.
+
+  ! Nuclear Reaction Network
+    change_net = .true.
+    new_net_name = 'pp_and_cno_extras.net'
+    change_initial_net = .true.
+    auto_extend_net = .true.
+    h_he_net = 'pp_and_cno_extras.net'
+    co_net = 'co_burn.net'
+    adv_net = 'approx21.net'
+
+  ! Opacity Tables; note that your choice of opacity has to be consistent with your mixture (i.e. initial_zfracs)
+    kappa_file_prefix = 'a09'   ! OPAL table for A09 mixture
+    kappa_lowT_prefix = 'lowT_fa05_a09p'
+    kappa_CO_prefix = 'a09_co'
+
+  ! display on-screen plots
+    pgstar_flag = .false.
+
+/ !end of star_job namelist
+
+
+&controls
+
+  ! Starting Specifications
+    initial_mass = 1.0 ! in Msun units
+
+  ! Stopping Specifications
+  ! do not change atol and rtol, below:
+!    when_to_stop_rtol = 1d-4
+!    when_to_stop_atol = 1d-4
+
+  ! stop when the center mass fraction of h1 drops below this limit
+    xa_central_lower_limit_species(1) = 'h1'
+    xa_central_lower_limit(1) = 0.6d0
+
+  ! Controls for Output
+    terminal_interval = 25
+    write_header_frequency = 8
+    num_trace_history_values = 0
+    trace_history_value_name(:) = ''
+
+    photo_interval = 1000
+    do_history_file = .true.
+    history_interval = 1
+    write_profiles_flag = .true.
+    profile_interval = 200
+    profile_data_suffix = '.prof'
+    max_num_profile_models = 1000
+
+  ! Convective Criteria
+    mixing_length_alpha = 2
+    use_ledoux_criterion = .false.    ! Schwarzschild criterion
+    alpha_semiconvection = 0
+
+  ! Minimum Diffusive Mixing
+    set_min_D_mix = .true.
+    min_D_mix = 1d2
+    
+  ! Overshooting around convective layers
+    overshoot_f_above_nonburn_core = 0.02
+    overshoot_f_above_nonburn_shell = 0.02
+    overshoot_f_below_nonburn_shell = 0.05
+    overshoot_f_above_burn_h_core = 0.02
+    overshoot_f_above_burn_h_shell = 0.02
+    overshoot_f_below_burn_h_shell = 0.02
+    overshoot_f_above_burn_he_core = 0.001
+    overshoot_f_above_burn_he_shell = 0.001
+    overshoot_f_below_burn_he_shell = 0.001
+
+    overshoot_f0_above_nonburn_core  = 0.001
+    overshoot_f0_above_nonburn_shell = 0.0001
+    overshoot_f0_below_nonburn_shell = 0.0001
+    overshoot_f0_above_burn_h_core  = 0.0001
+    overshoot_f0_above_burn_h_shell = 0.0001
+    overshoot_f0_below_burn_h_shell = 0.0001
+    overshoot_f0_above_burn_he_core  = 0.0001
+    overshoot_f0_above_burn_he_shell = 0.0001
+    overshoot_f0_below_burn_he_shell = 0.0001
+
+  ! Atmosphere Boundary Condition
+    which_atm_option = 'photosphere_tables'
+
+  ! Mass Loss
+    cool_wind_RGB_scheme = 'Dutch'
+    Dutch_scaling_factor = 1d0
+    cool_wind_AGB_scheme = 'van Loon'
+    van_Loon_scaling_factor = 1d0
+    de_Jager_scaling_factor = 1d0
+
+  ! Additional Opacity Settings
+    cubic_interpolation_in_X = .true.
+    cubic_interpolation_in_Z = .true.
+    use_simple_es_for_kap = .false.
+    use_Type2_opacities = .true.
+    Zbase = 0.014d0
+
+
+  ! Mesh
+    mesh_delta_coeff = 0.4
+
+    xtra_coef_a_l_nb_czb = 0.4
+    xtra_dist_a_l_nb_czb = 0.2
+    xtra_coef_b_l_nb_czb = 0.4
+    xtra_dist_b_l_nb_czb = 0.2
+
+    xtra_coef_a_u_nb_czb = 0.4
+    xtra_dist_a_u_nb_czb = 0.2
+    xtra_coef_b_u_nb_czb = 0.4
+    xtra_dist_b_u_nb_czb = 0.2
+
+    xtra_coef_a_l_hb_czb = 0.4
+    xtra_dist_a_l_hb_czb = 0.2
+    xtra_coef_b_l_hb_czb = 0.4
+    xtra_dist_b_l_hb_czb = 0.2
+
+    xtra_coef_a_u_hb_czb = 0.4
+    xtra_dist_a_u_hb_czb = 0.2
+    xtra_coef_b_u_hb_czb = 0.4
+    xtra_dist_b_u_hb_czb = 0.2
+
+    xtra_coef_a_l_heb_czb = 0.4
+    xtra_dist_a_l_heb_czb = 0.2
+    xtra_coef_b_l_heb_czb = 0.4
+    xtra_dist_b_l_heb_czb = 0.2
+
+    xtra_coef_a_u_heb_czb = 0.4
+    xtra_dist_a_u_heb_czb = 0.2
+    xtra_coef_b_u_heb_czb = 0.4
+    xtra_dist_b_u_heb_czb = 0.2
+
+  ! Timestep controls
+!    max_years_for_timestep = 1d7
+
+
+  ! Solver accuracy
+    tol_correction_norm = 3d-5
+    tol_max_correction = 3d-3
+
+
+
+
+
+/ ! end of controls namelist
