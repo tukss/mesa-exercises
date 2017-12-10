@@ -1,0 +1,14 @@
+&pgstar
+
+  ! MESA uses PGPLOT for live plotting and gives the user a tremendous
+  ! amount of control of the presentation of the information.
+
+    Grid8_win_flag = .true.
+    Grid8_win_width = 9
+    Grid8_file_dir = 'movie'
+    Grid8_file_flag = .true.
+    Grid8_file_interval = 1
+    Grid8_file_prefix = '25Msol_burning_'
+
+
+/ ! end of pgstar namelist

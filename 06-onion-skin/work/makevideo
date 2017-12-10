@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ffmpeg -pattern_type glob -i 'movie/25Msol_burning_*.png' 25Msol_burning.mp4

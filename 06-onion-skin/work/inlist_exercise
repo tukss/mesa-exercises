@@ -1,0 +1,84 @@
+! inlist to evolve a 15 solar mass star
+
+! For the sake of future readers of this file (yourself included),
+! ONLY include the controls you are actually using.  DO NOT include
+! all of the other controls that simply have their default values.
+
+&star_job
+
+    mesa_dir = ''
+
+  ! Startup information text
+    show_log_description_at_start = .true.
+    show_net_species_info = .true.
+    show_net_reactions_info = .true.
+    list_net_reactions = .true.
+    show_eqns_and_vars_names = .true.
+
+  ! Customized history.data and profileXXX.data columns
+    history_columns_file = 'hist_col.list'
+    profile_columns_file = 'mycols.list'
+
+  ! begin with a pre-main sequence model
+    create_pre_main_sequence_model = .false.
+
+  ! Load from a good starting point
+    load_saved_model = .false.
+    saved_model_name = 'undefined'
+
+  ! allow the star to have a net radial velocity once
+  ! the electron fraction in the core drops below 0.47
+    change_initial_v_flag = .true.
+    change_v_flag = .false.
+    new_v_flag = .true.
+    center_ye_limit_for_v_flag = 0.47
+ 
+  ! display on-screen plots
+    pgstar_flag = .true.
+
+/ !end of star_job namelist
+
+
+&controls
+
+  ! Starting Specifications
+    initial_mass = 25 ! in Msun units
+
+  ! stop on onset of core collapse
+    fe_core_infall_limit = 1d7
+
+  ! opacities
+
+      use_Type2_opacities = .true.
+      Zbase = 0.02
+
+! winds
+    !cool_wind_RGB_scheme = 'Dutch'
+    !cool_wind_AGB_scheme = 'Dutch'
+    !RGB_to_AGB_wind_switch = 1d-4
+    !hot_wind_scheme = 'Vink'
+    !Vink_scaling_factor = 1.0
+
+  ! Controls for Output
+    terminal_interval = 25
+    write_header_frequency = 8
+    num_trace_history_values = 0
+    trace_history_value_name(:) = ''
+
+    photo_interval = 100
+    do_history_file = .true.
+    history_interval = 1
+    write_profiles_flag = .true.
+    profile_interval = 200
+    profile_data_suffix = '.prof'
+    max_num_profile_models = 1000
+
+  ! Mesh
+    mesh_delta_coeff = 4.0
+
+  ! Solver accuracy
+    tol_correction_norm = 3d-5
+    tol_max_correction = 3d-3
+
+
+/ ! end of controls namelist
